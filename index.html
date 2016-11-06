@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="oldmenTest">
+<head>
+	<meta charset="UTF-8">
+	<title>oldmen-test</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/4.1.0/sanitize.min.css">
+	<!-- build:css app.css -->
+	<link rel="stylesheet" href="app.css">
+	<!-- endbuild -->
+</head>
+<body>
+	<div class="container" ng-controller = "FormController">
+		<div class="container__item container__form"><!-- 1 -->
+			<div class="item__color yellow">
+				<i class="fa fa-search form__fa" aria-hidden="true"></i>
+			</div>
+			<div class="item__color blue">
+				<form action="" class="form">
+					<input type="text" class="form__input" placeholder="Search..." autocomplete="on" ng-model="posterTitle"  >
+				</form>			
+			</div>
+		</div>
+		<div class="container__item container__list"><!-- 2 -->
+			<div class="item__color yellow"></div>
+			<div class="item__color blue"></div>
+			<ul class="list" id="item">
+			<li class="list__item" ng-if="poster.title =='The grand tour'" ng-repeat="poster in posters | filter:{title:posterTitle}"><i class="fa fa-rocket list__fa" aria-hidden="true"></i>{{poster.title}}</li>
+				<li class="list__item" ng-if="poster.title !== 'The grand tour'" ng-repeat="poster in posters | filter:{title:posterTitle}">{{poster.title}}</li>
+			</ul>
+			</div>
+			<div class="container__item container__poster"><!-- 3 -->
+				<div class="item__color blue"></div>
+				<div class="item__color yellow"></div>
+				<div class="poster poster__active" ng-if="poster.title =='The grand tour'" ng-repeat="poster in posters | filter:{title:posterTitle}">
+					<img ng-src="{{poster.image}}" alt="" class="poster__img">
+				</div>
+				<div class="poster" ng-if="posterTitle !='The grand tour'" ng-repeat="poster in posters | filter:{title:posterTitle}" ng-class="{'poster__active':posterTitle}">
+					<img ng-src="{{poster.image}}" alt="" class="poster__img">
+				</div>
+			</div>
+			<div class="container__item container__descr"><!-- 4 -->
+				<div class="item__color yellow"></div>
+				<div class="item__color blue"></div>
+				<div class="descr descr__active" ng-if="poster.title =='The grand tour'" ng-repeat="poster in posters | filter:{title:posterTitle}" >
+					<h1 class="descr__header">{{poster.title}}</h1>
+					<p class="descr__text">{{poster.description}}</p>
+				</div>
+				<div class="descr" ng-if="posterTitle !='The grand tour'" ng-repeat="poster in posters | filter:{title:posterTitle}" ng-class="{'descr__active':posterTitle}">
+					<h1 class="descr__header">{{poster.title}}</h1>
+					<p class="descr__text">{{poster.description}}</p>
+				</div>
+			</div>
+		</div>
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://use.fontawesome.com/6930280c07.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<!-- build:js app.js -->
+		<script src="app.js"></script>
+		<script src="resources/movies.js"></script>
+		<script src="resources/posters.js"></script>
+		<!-- endbuild -->
+	</body>
+	</html>
